@@ -14,8 +14,4 @@ public class UserService {
 
     private Logger logger = Logger.getLogger(UserService.class.getName());
 
-    public User save(User user) {
-        logger.info("Creating a new user...");
-        return userRepository.save(user);
-    }
 }

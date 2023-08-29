@@ -1,12 +1,11 @@
 package com.grownclose.controllers;
 
+import com.grownclose.dto.producers.ProducerFindDto;
+import com.grownclose.dto.producers.ProducerSaveDto;
 import com.grownclose.models.Producer;
 import com.grownclose.services.ProducerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/producers")
@@ -15,7 +14,12 @@ public class ProducerController {
     private ProducerService producerService;
 
     @PostMapping
-    public Producer create(@RequestBody Producer producer){
-        return producerService.save(producer);
+    public ProducerFindDto create(@RequestBody ProducerSaveDto producerSaveDto){
+        return producerService.save(producerSaveDto);
+    }
+
+    @GetMapping("/{id}")
+    public ProducerFindDto ReadById(@PathVariable Long id) {
+        return producerService.findById(id);
     }
 }

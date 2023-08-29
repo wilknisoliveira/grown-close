@@ -13,9 +13,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "users")
-@Inheritance(strategy = InheritanceType.JOINED)
-public class User {
+@Table(name = "products")
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int Id;
@@ -24,11 +23,14 @@ public class User {
     private String name;
 
     @Column(nullable = false)
+    private float price;
+    private String description;
+
+    @Column(nullable = false)
     private LocalDateTime date;
 
-    @Column(nullable = false)
-    private String email;
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Producer producer;
 
-    @Column(nullable = false)
-    private String password;
 }
