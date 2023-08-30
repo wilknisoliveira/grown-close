@@ -7,35 +7,29 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "products")
-public class Product {
+@Table(name = "reviews")
+public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int Id;
+    private int id;
 
     @Column(nullable = false)
-    private String name;
-
-    @Column(nullable = false)
-    private float price;
-    private String description;
+    private float vote;
 
     @Column(nullable = false)
     private LocalDateTime date;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
-    private Producer producer;
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Review> review = new HashSet<>();
-
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
 }
