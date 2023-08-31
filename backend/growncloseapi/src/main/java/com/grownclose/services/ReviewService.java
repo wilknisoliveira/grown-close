@@ -2,9 +2,7 @@ package com.grownclose.services;
 
 import com.grownclose.dto.reviews.ReviewDto;
 import com.grownclose.models.Review;
-import com.grownclose.repositories.ProductRepository;
 import com.grownclose.repositories.ReviewRepository;
-import com.grownclose.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,9 +20,10 @@ public class ReviewService {
     @Autowired
     private ProductService productService;
 
-    private Logger logger = Logger.getLogger(ReviewService.class.getName());
+    final private Logger logger = Logger.getLogger(ReviewService.class.getName());
 
     public ReviewDto save(ReviewDto reviewDto) {
+        logger.info("Creating a review...");
 
         //Verify if the vote is between 0 and 5
 
