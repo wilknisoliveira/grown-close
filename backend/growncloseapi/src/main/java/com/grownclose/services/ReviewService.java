@@ -25,13 +25,18 @@ public class ReviewService {
     private Logger logger = Logger.getLogger(ReviewService.class.getName());
 
     public ReviewDto save(ReviewDto reviewDto) {
+
+        //Verify if the vote is between 0 and 5
+
         Review review = new Review();
         review.setVote(reviewDto.vote());
+        review.setContent(reviewDto.content());
         review.setDate(LocalDateTime.now());
 
         review.setUser(userService.FindByIdRepo((long) reviewDto.userId()));
         review.setProduct(productService.FindByIdRepo((long) reviewDto.productId()));
 
+        //Improve this:
         //Verify if this combination already exist
         //If it exists, call the update method
 
