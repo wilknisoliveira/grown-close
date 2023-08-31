@@ -1,6 +1,7 @@
 package com.grownclose.services;
 
 import com.grownclose.dto.products.ProductDto;
+import com.grownclose.exceptions.ResourceNotFoundException;
 import com.grownclose.models.Product;
 import com.grownclose.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,8 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-    @Autowired ProducerService producerService;
+    @Autowired
+    private ProducerService producerService;
 
     private Logger logger = Logger.getLogger(ProductService.class.getName());
 
@@ -36,5 +38,11 @@ public class ProductService {
         );
 
         return productDtoResponse;
+    }
+
+    public Product FindByIdRepo(Long productId) {
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new ResourceNotFoundException("The user id "+productId+" doesn't exist."));
+        return product;
     }
 }
