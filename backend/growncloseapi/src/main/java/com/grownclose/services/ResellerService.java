@@ -2,6 +2,7 @@ package com.grownclose.services;
 
 import com.grownclose.dto.resellers.ResellerFindDto;
 import com.grownclose.dto.resellers.ResellerSaveDto;
+import com.grownclose.exceptions.ResourceNotFoundException;
 import com.grownclose.models.Reseller;
 import com.grownclose.repositories.ResellerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,5 +27,11 @@ public class ResellerService {
 
         ResellerFindDto resellerFindDto = new ResellerFindDto(resellerResponse);
         return resellerFindDto;
+    }
+
+    public Reseller findByIdRepo(int id) {
+        Reseller reseller =  resellerRepository.findById((long) id)
+                .orElseThrow(() -> new ResourceNotFoundException("The reseller id "+id+" doesn't exist."));
+        return reseller;
     }
 }
