@@ -1,12 +1,13 @@
 package com.grownclose.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -21,4 +22,7 @@ public class Reseller extends User {
     @Column(nullable = false, name = "contact_number")
     private int contactNumber;
     private String instagram;
+
+    @OneToMany(mappedBy = "reseller", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Order> order = new HashSet<>();
 }
