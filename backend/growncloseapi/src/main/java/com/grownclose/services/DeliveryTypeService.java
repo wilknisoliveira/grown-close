@@ -1,6 +1,7 @@
 package com.grownclose.services;
 
 import com.grownclose.dto.deliverytypes.DeliveryTypeDto;
+import com.grownclose.exceptions.ResourceNotFoundException;
 import com.grownclose.models.DeliveryType;
 import com.grownclose.repositories.DeliveryTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +26,11 @@ public class DeliveryTypeService {
         DeliveryTypeDto deliveryTypeDtoResponse = new DeliveryTypeDto(deliveryTypeResponse);
 
         return deliveryTypeDtoResponse;
+    }
+
+    public DeliveryType findByIdRepo(int id) {
+        DeliveryType deliveryType = deliveryTypeRepository.findById((long) id)
+                .orElseThrow(() -> new ResourceNotFoundException("The delivery type id "+id+" doesn't exist."));
+        return deliveryType;
     }
 }

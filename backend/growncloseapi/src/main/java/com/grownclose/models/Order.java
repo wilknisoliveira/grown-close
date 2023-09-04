@@ -25,11 +25,13 @@ public class Order {
     @Column(nullable = false)
     private LocalDateTime date;
 
-    @Column(nullable = false)
-    private String deliveryTypes;
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private DeliveryType deliveryType;
 
-    @Column(nullable = false)
-    private String status;
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private OrderStatus orderStatus;
 
     @ManyToOne
     @JoinColumn(name = "reseller_id")

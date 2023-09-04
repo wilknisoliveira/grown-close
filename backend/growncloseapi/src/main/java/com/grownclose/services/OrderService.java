@@ -2,9 +2,7 @@ package com.grownclose.services;
 
 import com.grownclose.dto.orders.OrderFindDto;
 import com.grownclose.dto.orders.OrderSaveDto;
-import com.grownclose.models.Order;
-import com.grownclose.models.Product;
-import com.grownclose.models.Reseller;
+import com.grownclose.models.*;
 import com.grownclose.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +21,12 @@ public class OrderService {
     @Autowired
     private ResellerService resellerService;
 
+    @Autowired
+    private DeliveryTypeService deliveryTypeService;
+
+    @Autowired
+    private OrderStatusService orderStatusService;
+
     final private Logger logger  = Logger.getLogger(OrderService.class.getName());
 
     public OrderFindDto save(OrderSaveDto orderSaveDto) {
@@ -35,10 +39,13 @@ public class OrderService {
         order.setAmount(amount);
 
         order.setDate(LocalDateTime.now());
-        //Correct it: Get the delivery type by id
-        order.setDeliveryTypes(orderSaveDto.deliveryTypes());
-        //Correct it: Get the status by id
-        order.setStatus("Submited");
+
+        DeliveryType deliveryType = deliveryTypeService.findByIdRepo(orderSaveDto.deliveryTypeId());
+        order.setDeliveryType(deliveryType);
+
+        //The Id 1 refers to the Submited Status
+        OrderStatus orderStatus = orderStatusService.findByIdRepo(1);
+        order.setOrderStatus(orderStatus);
 
         Reseller reseller = resellerService.findByIdRepo(orderSaveDto.resellerId());
         order.setReseller(reseller);

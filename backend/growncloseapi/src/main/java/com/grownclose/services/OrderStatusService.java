@@ -1,6 +1,7 @@
 package com.grownclose.services;
 
 import com.grownclose.dto.orderstatus.OrderStatusDto;
+import com.grownclose.exceptions.ResourceNotFoundException;
 import com.grownclose.models.OrderStatus;
 import com.grownclose.repositories.OrderStatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,5 +25,11 @@ public class OrderStatusService {
         OrderStatusDto orderStatusDtoResponse = new OrderStatusDto(orderStatusResponse);
 
         return orderStatusDtoResponse;
+    }
+
+    public OrderStatus findByIdRepo(int id) {
+        OrderStatus orderStatus = orderStatusRepository.findById((long) id)
+                .orElseThrow(() -> new ResourceNotFoundException("The order status id "+id+" doesn't exist."));
+        return orderStatus;
     }
 }

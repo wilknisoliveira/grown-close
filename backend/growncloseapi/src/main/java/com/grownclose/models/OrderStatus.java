@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -25,4 +26,7 @@ public class OrderStatus {
 
     @Column(nullable = false)
     private LocalDateTime date;
+
+    @OneToMany(mappedBy = "orderStatus")
+    private List<Order> orders;
 }
