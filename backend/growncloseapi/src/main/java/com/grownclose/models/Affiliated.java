@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -32,4 +33,7 @@ public class Affiliated extends User {
 
     @OneToMany(mappedBy = "affiliated", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Boost> boosts = new HashSet<>();
+
+    @OneToMany(mappedBy = "affiliated")
+    private List<Operation> operations;
 }
