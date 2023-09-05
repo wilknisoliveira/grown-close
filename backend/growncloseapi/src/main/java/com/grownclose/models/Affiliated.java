@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -26,4 +29,7 @@ public class Affiliated extends User {
 
     @Column(name = "clicks_day")
     private int clicksDay;
+
+    @OneToMany(mappedBy = "affiliated", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Boost> boosts = new HashSet<>();
 }

@@ -2,6 +2,7 @@ package com.grownclose.services;
 
 import com.grownclose.dto.affiliated.AffiliatedFindDto;
 import com.grownclose.dto.affiliated.AffiliatedSaveDto;
+import com.grownclose.exceptions.ResourceNotFoundException;
 import com.grownclose.models.Affiliated;
 import com.grownclose.repositories.AffiliatedRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,5 +27,12 @@ public class AffiliatedService {
         AffiliatedFindDto affiliatedFindDto = new AffiliatedFindDto(affiliatedResponse);
 
         return affiliatedFindDto;
+    }
+
+    public Affiliated findByIdRepo(int id) {
+        Affiliated affiliated = affiliatedRepository.findById((long) id)
+                .orElseThrow(() -> new ResourceNotFoundException("The affiliated id "+id+" doesn't exist."));
+
+        return affiliated;
     }
 }
