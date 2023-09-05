@@ -42,7 +42,7 @@ public class ProductService {
 
     public Product FindByIdRepo(Long productId) {
         Product product = productRepository.findById(productId)
-                .orElseThrow(() -> new ResourceNotFoundException("The user id "+productId+" doesn't exist."));
+                .orElseThrow(() -> new ResourceNotFoundException("The product id "+productId+" doesn't exist."));
         return product;
     }
 }
