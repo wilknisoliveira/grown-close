@@ -2,8 +2,10 @@ package com.grownclose.application.producer.dto;
 
 import com.grownclose.domain.producers.Producer;
 
+import java.util.UUID;
+
 public record ProducerFindDto(
-        int Id,
+        UUID Id,
         String name,
         String email,
         String address,

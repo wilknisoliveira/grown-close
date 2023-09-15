@@ -40,7 +40,7 @@ public class OrderService {
 
         Order order = new Order();
 
-        Product product =  productService.FindByIdRepo((long) orderSaveDto.productId());
+        Product product =  productService.FindByIdRepo(orderSaveDto.productId());
         float amount = product.getPrice() * orderSaveDto.quantity();
         order.setAmount(amount);
 
@@ -49,8 +49,8 @@ public class OrderService {
         DeliveryType deliveryType = deliveryTypeService.findByIdRepo(orderSaveDto.deliveryTypeId());
         order.setDeliveryType(deliveryType);
 
-        //The Id 1 refers to the Submited Status
-        OrderStatus orderStatus = orderStatusService.findByIdRepo(1);
+        //It refers to the Submitted Status
+        OrderStatus orderStatus = orderStatusService.findByName("Submitted");
         order.setOrderStatus(orderStatus);
 
         Reseller reseller = resellerService.findByIdRepo(orderSaveDto.resellerId());

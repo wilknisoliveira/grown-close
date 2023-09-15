@@ -5,6 +5,7 @@ import com.grownclose.infrastructure.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
 import java.util.logging.Logger;
 
 @Service
@@ -26,8 +27,8 @@ public class OperationTypeService {
         return operationTypeDtoResponse;
     }
 
-    public OperationType findByIdRepo(int id) {
-        OperationType operationType = operationTypeRepository.findById((long) id)
+    public OperationType findByIdRepo(UUID id) {
+        OperationType operationType = operationTypeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("The operation type id "+id+" doesn't exist."));
 
         return operationType;

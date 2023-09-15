@@ -3,8 +3,9 @@ package com.grownclose.application.orderStatus.dto;
 import com.grownclose.domain.orderstatus.OrderStatus;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
-public record OrderStatusDto(int id, String name, String description) {
+public record OrderStatusDto(UUID id, String name, String description) {
     public OrderStatusDto(OrderStatus orderStatus) {
         this (
                 orderStatus.getId(),

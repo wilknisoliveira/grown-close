@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 import java.util.logging.Logger;
 
 @Service
@@ -33,7 +34,7 @@ public class ProducerService {
         return producerFindDto;
     }
 
-    public ProducerFindDto findById(Long id) {
+    public ProducerFindDto findById(UUID id) {
         logger.info("Reading the producer with id: " + id);
         
         ProducerFindDto producerFindDto = new ProducerFindDto(this.findByIdRepo(id));
@@ -41,7 +42,7 @@ public class ProducerService {
         return producerFindDto;
     }
 
-    public Producer findByIdRepo(Long id) {
+    public Producer findByIdRepo(UUID id) {
         Producer producer = producerRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("This producer doesn't exist"));
         return producer;

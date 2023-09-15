@@ -2,8 +2,10 @@ package com.grownclose.application.reseller.dto;
 
 import com.grownclose.domain.resellers.Reseller;
 
+import java.util.UUID;
+
 public record ResellerFindDto(
-        int Id,
+        UUID Id,
         String name,
         String email,
         String address,

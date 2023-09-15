@@ -32,8 +32,8 @@ public class ReviewService {
         review.setContent(reviewDto.content());
         review.setDate(LocalDateTime.now());
 
-        review.setUser(userService.FindByIdRepo((long) reviewDto.userId()));
-        review.setProduct(productService.FindByIdRepo((long) reviewDto.productId()));
+        review.setUser(userService.FindByIdRepo(reviewDto.userId()));
+        review.setProduct(productService.FindByIdRepo(reviewDto.productId()));
 
         //Improve this:
         //Verify if this combination already exist

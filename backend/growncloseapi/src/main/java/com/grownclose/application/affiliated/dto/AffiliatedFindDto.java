@@ -2,8 +2,10 @@ package com.grownclose.application.affiliated.dto;
 
 import com.grownclose.domain.affiliated.Affiliated;
 
+import java.util.UUID;
+
 public record AffiliatedFindDto(
-        int Id,
+        UUID id,
         String name,
         String email,
         String instagram,

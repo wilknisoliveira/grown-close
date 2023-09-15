@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Logger;
 
 @Service
@@ -26,12 +27,12 @@ public class ProductService {
 
         Product product = productDto.dtoToEntity();
         product.setDate(LocalDateTime.now());
-        product.setProducer(producerService.findByIdRepo((long) productDto.producerId()));
+        product.setProducer(producerService.findByIdRepo(productDto.producerId()));
 
         Product productResponse = productRepository.save(product);
 
         ProductDto productDtoResponse = new ProductDto(
-                (long) productResponse.getId(),
+                productResponse.getId(),
                 productDto.name(),
                 productDto.price(),
                 productDto.description(),
@@ -41,15 +42,15 @@ public class ProductService {
         return productDtoResponse;
     }
 
-    public Product FindByIdRepo(Long productId) {
+    public Product FindByIdRepo(UUID productId) {
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new ResourceNotFoundException("The product id "+productId+" doesn't exist."));
         return product;
     }
 
-    public List<ProductResumeDto> GetResumeList(Long producerId) {
+    public List<ProductResumeDto> GetResumeList(UUID producerId) {
         producerService.findByIdRepo(producerId);
 
-        return productRepository.getResumeList(producerId.intValue());
+        return productRepository.getResumeList(producerId);
     }
 }

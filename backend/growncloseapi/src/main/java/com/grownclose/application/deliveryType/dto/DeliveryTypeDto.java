@@ -3,8 +3,9 @@ package com.grownclose.application.deliveryType.dto;
 import com.grownclose.domain.deliverytypes.DeliveryType;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
-public record DeliveryTypeDto(int id, String name, String description) {
+public record DeliveryTypeDto(UUID id, String name, String description) {
 
     public DeliveryTypeDto(DeliveryType deliveryType) {
         this (

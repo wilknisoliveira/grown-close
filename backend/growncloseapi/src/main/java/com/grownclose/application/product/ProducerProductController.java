@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/producer/products")
@@ -20,7 +21,7 @@ public class ProducerProductController {
     }
 
     @GetMapping("/resumeList/{producerId}")
-    private List<ProductResumeDto> readResumeList(@PathVariable Long producerId) {
+    private List<ProductResumeDto> readResumeList(@PathVariable UUID producerId) {
         return productService.GetResumeList(producerId);
     }
 }
