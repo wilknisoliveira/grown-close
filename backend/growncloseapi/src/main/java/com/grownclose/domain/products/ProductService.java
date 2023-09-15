@@ -1,12 +1,14 @@
 package com.grownclose.domain.products;
 
 import com.grownclose.application.product.dto.ProductDto;
+import com.grownclose.application.product.dto.ProductResumeDto;
 import com.grownclose.domain.producers.ProducerService;
 import com.grownclose.infrastructure.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.logging.Logger;
 
 @Service
@@ -43,5 +45,11 @@ public class ProductService {
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new ResourceNotFoundException("The product id "+productId+" doesn't exist."));
         return product;
+    }
+
+    public List<ProductResumeDto> GetResumeList(Long producerId) {
+        producerService.findByIdRepo(producerId);
+
+        return productRepository.getResumeList(producerId.intValue());
     }
 }
