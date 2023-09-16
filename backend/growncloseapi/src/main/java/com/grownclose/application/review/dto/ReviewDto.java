@@ -1,5 +1,7 @@
 package com.grownclose.application.review.dto;
 
 
-public record ReviewDto(float vote, String content, int userId, int productId) {
+import java.util.UUID;
+
+public record ReviewDto(float vote, String content, UUID userId, UUID productId) {
 }

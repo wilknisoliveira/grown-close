@@ -5,8 +5,9 @@ import com.grownclose.domain.boosts.Boost;
 import com.grownclose.domain.products.Product;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
-public record BoostDto(int id, int clickNumber, float balance, int affiliatedId, int productId) {
+public record BoostDto(UUID id, int clickNumber, float balance, UUID affiliatedId, UUID productId) {
     public BoostDto(Boost boost) {
         this (
                 boost.getId(),

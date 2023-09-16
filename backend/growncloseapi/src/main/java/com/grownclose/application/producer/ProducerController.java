@@ -6,6 +6,8 @@ import com.grownclose.domain.producers.ProducerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/producers")
 public class ProducerController {
@@ -18,7 +20,7 @@ public class ProducerController {
     }
 
     @GetMapping("/{id}")
-    public ProducerFindDto ReadById(@PathVariable Long id) {
+    public ProducerFindDto ReadById(@PathVariable UUID id) {
         return producerService.findById(id);
     }
 }

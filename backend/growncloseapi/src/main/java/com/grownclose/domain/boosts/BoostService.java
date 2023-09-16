@@ -27,7 +27,7 @@ public class BoostService {
         logger.info("Generating a boost...");
 
         Affiliated affiliated = affiliatedService.findByIdRepo(boostDto.affiliatedId());
-        Product product = productService.FindByIdRepo((long) boostDto.productId());
+        Product product = productService.FindByIdRepo(boostDto.productId());
 
         Boost boost = boostDto.dtoToEntity(affiliated, product);
 

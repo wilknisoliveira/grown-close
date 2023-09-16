@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 import java.util.logging.Logger;
 
 @Service
@@ -27,8 +28,8 @@ public class ResellerService {
         return resellerFindDto;
     }
 
-    public Reseller findByIdRepo(int id) {
-        Reseller reseller =  resellerRepository.findById((long) id)
+    public Reseller findByIdRepo(UUID id) {
+        Reseller reseller =  resellerRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("The reseller id "+id+" doesn't exist."));
         return reseller;
     }

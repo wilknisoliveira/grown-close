@@ -1,5 +1,6 @@
 package com.grownclose.infrastructure.exceptions.handler;
 
+import com.grownclose.infrastructure.exceptions.BadRequestException;
 import com.grownclose.infrastructure.exceptions.ExceptionResponse;
 import com.grownclose.infrastructure.exceptions.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -36,6 +37,17 @@ public class CustomizedResponseExceptionHandler extends ResponseEntityExceptionH
         );
 
         return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(BadRequestException.class)
+    protected ResponseEntity<ExceptionResponse> handleBadRequestException(Exception exception, WebRequest request) {
+        ExceptionResponse exceptionResponse = new ExceptionResponse(
+                new Date(),
+                exception.getMessage(),
+                request.getDescription(false)
+        );
+
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
 
 }

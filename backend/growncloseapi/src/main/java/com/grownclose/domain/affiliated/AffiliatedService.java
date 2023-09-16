@@ -6,6 +6,7 @@ import com.grownclose.infrastructure.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
 import java.util.logging.Logger;
 
 @Service
@@ -27,8 +28,8 @@ public class AffiliatedService {
         return affiliatedFindDto;
     }
 
-    public Affiliated findByIdRepo(int id) {
-        Affiliated affiliated = affiliatedRepository.findById((long) id)
+    public Affiliated findByIdRepo(UUID id) {
+        Affiliated affiliated = affiliatedRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("The affiliated id "+id+" doesn't exist."));
 
         return affiliated;

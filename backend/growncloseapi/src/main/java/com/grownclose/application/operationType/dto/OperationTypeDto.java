@@ -3,8 +3,9 @@ package com.grownclose.application.operationType.dto;
 import com.grownclose.domain.operationtypes.OperationType;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
-public record OperationTypeDto(int id, String name, String description) {
+public record OperationTypeDto(UUID id, String name, String description) {
     public OperationTypeDto(OperationType operationType) {
         this (
                 operationType.getId(),

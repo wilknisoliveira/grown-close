@@ -5,6 +5,7 @@ import com.grownclose.infrastructure.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
 import java.util.logging.Logger;
 
 @Service
@@ -25,8 +26,8 @@ public class DeliveryTypeService {
         return deliveryTypeDtoResponse;
     }
 
-    public DeliveryType findByIdRepo(int id) {
-        DeliveryType deliveryType = deliveryTypeRepository.findById((long) id)
+    public DeliveryType findByIdRepo(UUID id) {
+        DeliveryType deliveryType = deliveryTypeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("The delivery type id "+id+" doesn't exist."));
         return deliveryType;
     }

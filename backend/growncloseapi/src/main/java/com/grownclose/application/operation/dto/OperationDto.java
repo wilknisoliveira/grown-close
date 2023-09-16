@@ -5,8 +5,9 @@ import com.grownclose.domain.operations.Operation;
 import com.grownclose.domain.operationtypes.OperationType;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
-public record OperationDto(int id, float value, int affiliatedId, int operationTypeId) {
+public record OperationDto(UUID id, float value, UUID affiliatedId, UUID operationTypeId) {
     public OperationDto(Operation operation) {
         this (
                 operation.getId(),

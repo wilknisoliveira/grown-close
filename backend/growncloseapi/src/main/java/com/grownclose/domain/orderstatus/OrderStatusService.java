@@ -5,6 +5,7 @@ import com.grownclose.infrastructure.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
 import java.util.logging.Logger;
 
 @Service
@@ -25,9 +26,9 @@ public class OrderStatusService {
         return orderStatusDtoResponse;
     }
 
-    public OrderStatus findByIdRepo(int id) {
-        OrderStatus orderStatus = orderStatusRepository.findById((long) id)
-                .orElseThrow(() -> new ResourceNotFoundException("The order status id "+id+" doesn't exist."));
+    public OrderStatus findByName(String name) {
+        OrderStatus orderStatus = orderStatusRepository.findByName(name)
+                .orElseThrow(() -> new ResourceNotFoundException("The "+name+" order status doesn't exist."));
         return orderStatus;
     }
 }
