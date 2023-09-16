@@ -10,6 +10,7 @@ import com.grownclose.domain.resellers.Reseller;
 import com.grownclose.domain.orderstatus.OrderStatusService;
 import com.grownclose.domain.products.ProductService;
 import com.grownclose.domain.resellers.ResellerService;
+import com.grownclose.infrastructure.exceptions.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,6 +39,10 @@ public class OrderService {
     public OrderFindDto save(OrderSaveDto orderSaveDto) {
         logger.info("Creating a order...");
 
+        if(orderSaveDto.quantity() < 1) {
+            throw new BadRequestException("You need to request a minimum quantity.");
+        }
+
         Order order = new Order();
 
         Product product =  productService.FindByIdRepo(orderSaveDto.productId());
@@ -49,7 +54,6 @@ public class OrderService {
         DeliveryType deliveryType = deliveryTypeService.findByIdRepo(orderSaveDto.deliveryTypeId());
         order.setDeliveryType(deliveryType);
 
-        //It refers to the Submitted Status
         OrderStatus orderStatus = orderStatusService.findByName("Submitted");
         order.setOrderStatus(orderStatus);
 
