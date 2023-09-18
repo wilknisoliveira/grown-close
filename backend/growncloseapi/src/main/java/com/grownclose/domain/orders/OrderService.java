@@ -1,5 +1,6 @@
 package com.grownclose.domain.orders;
 
+import com.grownclose.application.order.dto.OrderDetail;
 import com.grownclose.application.order.dto.OrderFindDto;
 import com.grownclose.application.order.dto.OrderSaveDto;
 import com.grownclose.domain.deliverytypes.DeliveryType;
@@ -15,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.UUID;
 import java.util.logging.Logger;
 
 @Service
@@ -64,5 +67,9 @@ public class OrderService {
         Order orderResponse =  orderRepository.save(order);
         OrderFindDto orderFindDto = new OrderFindDto(orderResponse);
         return orderFindDto;
+    }
+
+    public List<OrderDetail> findList(UUID resellerId) {
+        return orderRepository.findByResellerId(resellerId);
     }
 }
